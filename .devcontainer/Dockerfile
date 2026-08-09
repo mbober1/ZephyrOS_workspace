@@ -87,6 +87,7 @@ RUN apt-get -y update && \
 		udev \
 		wget \
 		picocom \
+		usbutils \
 		&& \
 	apt-get clean -y && \
 	apt-get autoremove --purge -y && \
@@ -115,6 +116,15 @@ RUN wget -q --post-data "accept_license_agreement=accepted" https://www.segger.c
 	dpkg -i ./JLink_Linux_x86_64.deb && \
 	rm ./JLink_Linux_x86_64.deb
 
+# Install Ozone
+RUN wget -q https://www.segger.com/downloads/jlink/Ozone_Linux_x86_64.deb && \
+	dpkg -i ./Ozone_Linux_x86_64.deb && \
+	rm ./Ozone_Linux_x86_64.deb
+
+# Install latest pyocd rules
+ADD https://github.com/pyocd/pyOCD/raw/refs/heads/main/udev/49-stlinkv3.rules /etc/udev/rules.d/49-stlinkv3.rules
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}/workspace
+
+RUN pyocd pack install STM32H563ZITx
