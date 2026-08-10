@@ -1,8 +1,8 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.20.0)
-
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
-project(main_app)
 
-target_sources(app PRIVATE src/app_cpu/main.c)
+project(remote_app)
+target_sources(app PRIVATE ../src/remote_cpu/main.c)

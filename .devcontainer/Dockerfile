@@ -42,7 +42,7 @@ WORKDIR "${ZEPHYR_SDK_DIR}"
 ADD https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZSDK_VERSION}/zephyr-sdk-${ZSDK_VERSION}_linux-x86_64_minimal.tar.xz zephyr-sdk.tar.xz
 RUN tar xf zephyr-sdk.tar.xz
 WORKDIR "${ZEPHYR_SDK}"
-RUN ./setup.sh -t ${TOOLCHAIN} -h
+RUN ./setup.sh -t arm-zephyr-eabi -t riscv64-zephyr-elf -h
 
 
 
@@ -123,8 +123,7 @@ RUN wget -q https://www.segger.com/downloads/jlink/Ozone_Linux_x86_64.deb && \
 
 # Install latest pyocd rules
 ADD https://github.com/pyocd/pyOCD/raw/refs/heads/main/udev/49-stlinkv3.rules /etc/udev/rules.d/49-stlinkv3.rules
+ADD --chmod=+x https://files.nordicsemi.com/ui/api/v1/download?repoKey=swtools&path=external/nrfutil/executables/x86_64-unknown-linux-gnu/nrfutil&isNativeBrowsing=false /usr/local/bin/nrfutil
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}/workspace
-
-RUN pyocd pack install STM32H563ZITx

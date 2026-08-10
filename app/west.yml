@@ -6,31 +6,22 @@ manifest:
     path: app
 
   remotes:
-    - name: mbober
-      url-base: https://github.com/mbober1
-    - name: upstream
-      url-base: https://github.com/zephyrproject-rtos
+    - name: ncs
+      url-base: https://github.com/nrfconnect
 
   projects:
-    - name: zephyr
-      remote: upstream
-      repo-path: zephyr
-      revision: v4.4.0
+    - name: nrf
+      remote: ncs
+      repo-path: sdk-nrf
+      revision: v3.4.0
       clone-depth: 1
       import:
         name-allowlist:
-          - cmsis
-          - cmsis-dsp
           - cmsis_6
-          - hal_stm32
+          - hal_nordic
+          - mbedtls
+          - nrfxlib
+          - oberon-psa-crypto
           - segger
-
-    # - name: mt6701
-    #   path: modules/lib/mt6701
-    #   revision: master
-    #   url: https://github.com/mbober1/MT6701-Zephyr-Module
-
-    # - name: spinner
-    #   path: modules/lib/spinner
-    #   revision: main
-    #   url: https://github.com/teslabs/spinner
+          - trusted-firmware-m
+          - zephyr

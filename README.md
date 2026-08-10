@@ -11,10 +11,5 @@
 ```
 west init --local app
 west update
-west build -b weact_stm32g431_core app
-```
-
-## Device testing
-```
-twister --device-testing --hardware-map hardware-map.yml -T app
+west build -b nrf54l15dk/nrf54l15/cpuapp app --sysbuild
 ```
